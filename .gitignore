@@ -1,0 +1,11 @@
+# Ignorar la carpeta node_modules
+node_modules/
+
+# Ignorar archivos de build (si estás usando `vite build`)
+dist/
+
+# Archivos temporales del sistema (opcional)
+.DS_Store
+Thumbs.db
+
+
