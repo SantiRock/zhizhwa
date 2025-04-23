@@ -1,8 +1,14 @@
 {
-  "name": "threejs-journey-exercise",
+  "name": "zhizhwa",
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "author": {
+  "name": "Santiago Quintero",
+  "email": "sqp.dev@gmail.com",
+  "url": "https://a1v8.onrender.com"
+  },
+
   "scripts": {
     "dev": "vite",
     "build": "vite build"
