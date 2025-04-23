@@ -32,6 +32,7 @@ body
     position: relative;
     margin: 25px 30px;
     height: calc(100vh - 50px);
+    pointer-events: none;
 }
 
 .exit_fullscreen {
@@ -43,6 +44,7 @@ body
     align-items: center;
     opacity: 0;
     transition: opacity 1.0s ease;
+    pointer-events: auto;
 }
 
 .exit_fullscreen:hover {
@@ -108,6 +110,7 @@ button {
     background-color: rgb(9, 9, 9);
     color: white;
     transition: transform 0.5s ease;
+    pointer-events: auto;
 }
 
 ul {
@@ -124,6 +127,10 @@ ul {
 
 .inputs {
     width: 230px;
+}
+
+input {
+    pointer-events: auto;
 }
 
 li{
@@ -149,6 +156,7 @@ li{
 a {
     color: white;
     text-decoration: none;
+    pointer-events: auto;
     transition: opacity 1.s ease;
 }
 
@@ -157,4 +165,7 @@ a:hover {
     color: rgb(175, 246, 255);
 }
 
-
+.tl {
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+}
