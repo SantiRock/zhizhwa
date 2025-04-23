@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/zhizhwa/images/favicon.ico" />
+    <meta property="og:image" content="[img]https://i.imgur.com/qp3A3W9.jpg" />
+    <meta property="og:title" content="Zhizhwa" />
+    <meta property="og:description" content="Zhizhwa - a1v8, interactive artistic web experience" />
+    <meta property="og:url" content="https://a1v8.onrender.com/" />
+    <meta http-equiv="Content-Language" content=" ">
+    <meta name="description" content="Zhizhwa - a1v8, interactive artistic web experience">
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="threejs, webgl, opengl, fragment, vertex, shaders, shader, webart, netart, zhizhwa">
+    <meta name="author" content="Santiago Quintero Pinto - a1v8"/>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.0.0/modern-normalize.min.css"
+    />
+    <title>Zhizhwa</title>
+    <script type="module" crossorigin src="/zhizhwa/assets/index-UHr7KjCY.js"></script>
+    <link rel="stylesheet" crossorigin href="/zhizhwa/assets/index-Ch_pOCLG.css">
+  </head>
+
+  <body id="body">
+    <canvas class="webgl"></canvas>
+
+    <div class="container">
+
+      <div class="exit_fullscreen" id="exit_fullscreen">
+        <p id="full_screen">Full Screen</p>
+        <p class="fullscreen_btn" id="exit_fullscreen_btn"></p></p>
+      </div>
+
+      <div>
+      <div class="button" id="dbSliders">
+        <button class="" id="bSliders">V</button>
+        <b> -&nbsp; Sliders</b>
+      </div>
+    
+      <ul class="inputs see" id="listSliders">
+        <li>
+          <p class="titles">Zoom</p>
+          <input
+            id="i_zoom"
+            type="range"
+            min="0.6"
+            max="2.3"
+            step="0.01"
+            value="1.7"
+          />
+          <p class="numbers" id="n_zoom">1.7</p>
+        </li>
+        <li>
+          <p class="titles">Speed</p>
+          <input
+            id="i_speed"
+            type="range"
+            min="0.01"
+            max="0.9"
+            step="0.01"
+            value="0.03"
+          />
+          <p class="numbers" id="n_speed">0.03</p>
+        </li>
+        <li>
+          <p class="titles">Tickness</p>
+          <input
+            id="i_tickness"
+            type="range"
+            min="0.005"
+            max="0.3"
+            step="0.001"
+            value="0.3"
+          />
+          <p class="numbers" id="n_tickness">0.3</p>
+        </li>
+        <li>
+          <p class="titles">R</p>
+          <input
+            id="i_r"
+            type="range"
+            min="0.7"
+            max="1.0"
+            step="0.001"
+            value="1.0"
+          />
+          <p class="numbers" id="n_r">1</p>
+        </li>
+        <li>
+          <p class="titles">G</p>
+          <input
+            id="i_g"
+            type="range"
+            min="0.7"
+            max="1.0"
+            step="0.001"
+            value="1.0"
+          />
+          <p class="numbers" id="n_g">1</p>
+        </li>
+        <li>
+          <p class="titles">B</p>
+          <input
+            id="i_b"
+            type="range"
+            min="0.7"
+            max="1.0"
+            step="0.001"
+            value="1.0"
+          />
+          <p class="numbers" id="n_b">1</p>
+        </li>
+      </ul>
+
+      <div class="button" id="dbData">
+        <button class="close" id="bData">V</button>
+        <b> -&nbsp; Real Time Data</b>
+      </div>
+
+      <ul class="data_info" id="listData">
+          <li><p>mesh.rotatio.x: <span id="mesh_x"></span></p></li>
+          <li><p>mesh.rotatio.y: <span id="mesh_y"></span></p></li>
+          <li><p>mesh.rotatio.z: <span id="mesh_z"></span></p></li>
+          <li><p>elapsedTime: <span id="elapsedTime"></span></p></li>
+          <li><p>twril: <span id="twril"></span></p></li>
+          <li><p>project weight: 73.2 MB</p></li>
+      </ul>
+      </div>
+      
+      <a id="link" href="https://www.instagram.com/_a1v8/" target="_blank">a1v8</a>
+    </div>
+
+  </body>
+</html>
