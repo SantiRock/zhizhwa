@@ -3,7 +3,6 @@ import { TrackballControls } from 'three/examples/jsm/Addons.js'
 import testVertexShader from '../static/shaders/test/vertex.glsl'
 import testFragmentShader from '../static/shaders/test/fragment.glsl'
 
-
 /**
  * SETUP
  */
@@ -15,6 +14,31 @@ const exitFullscreen = document.getElementById('exit_fullscreen')
 const fullScreenText = document.getElementById('full_screen')
 const exitFullscreenBtn = document.getElementById('exit_fullscreen_btn')
 
+let wakeLock = null;
+
+// WakeLock
+
+async function requestWakeLock() {
+    try {
+        wakeLock = await navigator.wakeLock.request('screen')
+        console.log("wakeLock")
+    } catch (err) {
+        console,error(err.message)
+    } 
+}
+
+function desactivarWakeLock() {
+    if (wakeLock) {
+        wakeLock.release();
+        wakeLock = null;
+        console.log("!wakeLock")
+    }
+}
+
+
+
+// FullScreen
+
 exitFullscreen.addEventListener("click", () => {
     if(!document.fullscreenElement) {
 
@@ -25,6 +49,7 @@ exitFullscreen.addEventListener("click", () => {
         } else if (body.msRequestFullscreen) {
             body.msRequestFullscreen()
         }
+
     }
 
     if(document.fullscreenElement) {
@@ -44,7 +69,6 @@ document.addEventListener("mozfullscreenchange", handler);    // Firefox
 document.addEventListener("MSFullscreenChange", handler);     // IE11 (raro, pero a veces...)
 
 function handler() {
-  console.log("⚡ cambio de pantalla completa");
   if (!document.fullscreenElement &&
       !document.webkitFullscreenElement &&
       !document.mozFullScreenElement &&
@@ -53,11 +77,14 @@ function handler() {
     exitFullscreenBtn.classList.add("fullscreen_btn")
     exitFullscreenBtn.classList.remove("exit_fullscreen_btn")
     exitFullscreenBtn.textContent = ""
+    desactivarWakeLock()
+
   } else {
     fullScreenText.textContent = "Exit Full Screen";
     exitFullscreenBtn.classList.remove("fullscreen_btn")
     exitFullscreenBtn.classList.add("exit_fullscreen_btn")
     exitFullscreenBtn.textContent = "X"
+    requestWakeLock()
   }
 }
 
@@ -106,23 +133,50 @@ dataDiv.addEventListener('click', () => {
     dataBtn.classList.toggle('close')
 })
 
+
+const weightDiv = document.getElementById("dbWeight")
+const weightBtn = document.getElementById("bWeight")
+const weightList = document.getElementById("listWeight")
+
+weightDiv.addEventListener('click', () => {
+    weightList.classList.toggle('see')
+    weightBtn.classList.toggle('close')
+})
+
 let temporizador
+let temporizador_textes
 
 function ocultar() {
     slidersDiv.style.opacity = "0"
     dataDiv.style.opacity = "0"
+    weightDiv.style.opacity = "0"
     exitFullscreen.style.opacity = "0"
     a_link.style.opacity = "0"
+}
+
+
+function ocultar_textes() {
+    slidersList.style.opacity = "0"
+    dataList.style.opacity = "0"
+    weightList.style.opacity = "0"
 }
 
 function reiniciarInactividad() {
     slidersDiv.style.opacity = "1"
     dataDiv.style.opacity = "1"
+    weightDiv.style.opacity = "1"
     exitFullscreen.style.opacity = "1"
-    a_link.style.opacity ="1"
+    a_link.style.opacity = "1"
+    slidersList.style.opacity = "1"
+    dataList.style.opacity = "1"
+    weightList.style.opacity = "1"
+
 
     clearTimeout(temporizador)
-    temporizador = setTimeout(ocultar,3000) 
+    temporizador = setTimeout(ocultar,3000)
+
+    clearTimeout(temporizador_textes)
+    temporizador_textes = setTimeout(ocultar_textes, 15000)
 }
 
 ['mousemove', 'touchstart', 'keydown'].forEach(e => {
@@ -315,3 +369,6 @@ const tick = () =>
 }
 
 tick()
+
+console.log("A1V8 is an artistic project that explores real-time interactive imagery through graphic programming. We are interested in creating aesthetic experiences through code, exploring the expressive potential of technology as a visual language. Our aim is to promote the production of web and/or non-web projects that integrate interactive visual proposals.")
+

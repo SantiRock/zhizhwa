@@ -118,11 +118,13 @@ ul {
     margin-left: 7px;
     overflow: hidden;
     max-height: 0;
+    transition: opacity 1.0s ease;
 }
 
 .see {
     max-height: fit-content;
-    overflow: visible;  
+    overflow: visible;
+    margin-bottom: 30px;
 }
 
 .inputs {
@@ -157,7 +159,7 @@ a {
     color: white;
     text-decoration: none;
     pointer-events: auto;
-    transition: opacity 1.s ease;
+    transition: transform 0.5s ease;
 }
 
 a:hover {
