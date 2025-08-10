@@ -1,26 +1,23 @@
 {
-  "name": "zhizhwa",
+  "name": "A1V8",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://santirock.github.io/zhizhwa/",
+  "homepage": "https://a1v8.onrender.com",
   "author": {
-    "name": "Santiago Quintero",
+    "name": "Santiago Quintero Pinto",
     "email": "sqp.dev@gmail.com",
     "url": "https://a1v8.onrender.com"
   },
   "scripts": {
-    "predeploy": "npm run build",
     "dev": "vite",
-    "build": "vite build",
-    "deploy": "gh-pages -d dist"
+    "build": "vite build"
   },
   "devDependencies": {
     "vite": "^6.2.2",
     "vite-plugin-restart": "^0.4.2"
   },
   "dependencies": {
-    "gh-pages": "^6.3.0",
     "lil-gui": "^0.20.0",
     "three": "^0.174.0",
     "vite-plugin-glsl": "^1.4.0"

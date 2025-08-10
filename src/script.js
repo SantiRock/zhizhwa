@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import { TrackballControls } from 'three/examples/jsm/Addons.js'
-import testVertexShader from '../static/shaders/test/vertex.glsl'
-import testFragmentShader from '../static/shaders/test/fragment.glsl'
+import testVertexShader from '../static/shaders/vertex.glsl'
+import testFragmentShader from '../static/shaders/fragment.glsl'
 
 /**
  * SETUP
@@ -9,14 +9,71 @@ import testFragmentShader from '../static/shaders/test/fragment.glsl'
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
+
+
+/**
+ * INTERFACE
+ */
+
+// HTML tags
 const body = document.getElementById('body')
+const container = document.getElementById("container")
+
 const exitFullscreen = document.getElementById('exit_fullscreen')
 const fullScreenText = document.getElementById('full_screen')
 const exitFullscreenBtn = document.getElementById('exit_fullscreen_btn')
 
-let wakeLock = null;
+const zhizwhaH = document.getElementById('zhizhwa')
+const modal1 = document.getElementById("modal1")
+const modalClose1 = document.getElementById("modal_close1")
+const modalBtn1 = document.getElementById("modal_btn")
+const zText = document.getElementById("z_text")
+const zTitle = document.getElementById("z_title")
+let isTech = false;
+
+const modal = document.getElementById("modal")
+const a_link = document.getElementById("link")
+const modalClose = document.getElementById("modal_close")
+
+// Generals
+window.addEventListener("orientationchange", () => {
+    location.reload()
+})
+
+// Modal Zhizhwa
+zhizwhaH.addEventListener("click", () => {
+    modal1.classList.toggle("is-hidden")
+})
+
+modalClose1.addEventListener("click", () => {
+    modal1.classList.toggle("is-hidden")
+})
+
+modalBtn1.addEventListener("click", () => {
+    if (!isTech) {
+        zText.textContent = "Zhizhwa es una obra de arte digital creada mediante programación gráfica a través del lenguaje de shaders GLSL. La información visual se envía directamente a la tarjeta gráfica desde el código, frame a frame, sin depender de archivos de video, y permitiendo la interactividad. La animación se crea y desaparece a cada fotograma; no es posible avanzar ni retroceder, solo existe en el instante presente. Los controles deslizantes (sliders) están conectados directamente al fragment shader, lo que habilita al usuario modificar en tiempo real algunos de sus valores, influyendo así en la visualización de la animación."
+        zTitle.textContent = ""
+        modalBtn1.textContent = "Concepto"
+        isTech = true
+    } else if (isTech) {
+        zText.textContent = "Inspirada en el universo VJ (mezcla de video en tiempo real), Zhizhwa es una interfaz web que permite al visitante modificar en tiempo real una animación generada por código, dando lugar a infinitas variaciones de una forma que se dibuja y desdibuja continuamente. Formas danzantes que acompañadas de música tienden a la sincronía, produciendo una experiencia sinestésica: fusión de percepciones sensoriales."
+        zTitle.textContent = "Zhizhwa - De la lengua muisca: garabato"
+        modalBtn1.textContent = "Técnica"
+        isTech = false
+    }
+})
+
+// Modal
+a_link.addEventListener("click", () => {
+    modal.classList.toggle("is-hidden")
+})
+
+modalClose.addEventListener("click", () => {
+    modal.classList.toggle("is-hidden")
+})
 
 // WakeLock
+let wakeLock = null;
 
 async function requestWakeLock() {
     try {
@@ -36,9 +93,7 @@ function desactivarWakeLock() {
 }
 
 
-
 // FullScreen
-
 exitFullscreen.addEventListener("click", () => {
     if(!document.fullscreenElement) {
 
@@ -89,6 +144,142 @@ function handler() {
 }
 
 
+// Buttons
+
+function isMobile() {
+    return /Mobi|Android|iPhone/.test(navigator.userAgent)
+}
+
+function getOrientation() {
+    if (window.matchMedia("(orientation: portrait)").matches) {
+        return 'portrait'
+    } else if (window.matchMedia("(orientation: landscape").matches) {
+        return 'landscape'
+    }
+    return 'unkown'
+}
+
+console.log(getOrientation())
+
+if (isMobile()) {
+    container.style.justifyContent = "start"
+}
+
+const slidersDiv = document.getElementById("dbSliders")
+const slidersBtn = document.getElementById("bSliders")
+const slidersList = document.getElementById("listSliders")
+const dataDiv = document.getElementById("dbData")
+const dataBtn = document.getElementById("bData")
+const dataList = document.getElementById("listData")
+const weightDiv = document.getElementById("dbWeight")
+const weightBtn = document.getElementById("bWeight")
+const weightList = document.getElementById("listWeight")
+
+if (isMobile() && getOrientation() === "landscape") {
+
+    slidersList.classList.remove("see")
+    slidersBtn.classList.add('rotation')
+
+    slidersDiv.addEventListener('click', () => {
+        zhizwhaH.classList.toggle('hide')
+        slidersList.classList.toggle('see')
+        slidersBtn.classList.toggle('rotation')
+        dataDiv.classList.toggle('hide')
+        weightDiv.classList.toggle('hide')
+    })
+
+    dataDiv.addEventListener('click', () => {
+        zhizwhaH.classList.toggle('hide')
+        dataList.classList.toggle('see')
+        dataBtn.classList.toggle('rotation')
+        slidersDiv.classList.toggle('hide')
+        weightDiv.classList.toggle('hide')
+    })
+
+    weightDiv.addEventListener('click', () => {
+        zhizwhaH.classList.toggle('hide')
+        weightList.classList.toggle('see')
+        weightBtn.classList.toggle('rotation')
+        dataDiv.classList.toggle('hide')
+        slidersDiv.classList.toggle('hide')
+    })
+} else {
+    slidersDiv.addEventListener('click', () => {
+        slidersList.classList.toggle('see')
+        slidersBtn.classList.toggle('rotation')
+    
+    })
+    
+    dataDiv.addEventListener('click', () => {
+        dataList.classList.toggle('see')
+        dataBtn.classList.toggle('rotation')
+    })
+    
+    weightDiv.addEventListener('click', () => {
+        weightList.classList.toggle('see')
+        weightBtn.classList.toggle('rotation')
+    })
+}
+
+// Temporizador ocultar
+
+let temporizador
+let temporizador_textes
+
+function ocultar() {
+    slidersDiv.style.opacity = "0"
+    dataDiv.style.opacity = "0"
+    weightDiv.style.opacity = "0"
+    exitFullscreen.style.opacity = "0"
+    a_link.style.opacity = "0"
+    zhizwhaH.style.opacity = "0"
+}
+
+function ocultar_textes() {
+    slidersList.style.opacity = "0"
+    dataList.style.opacity = "0"
+    weightList.style.opacity = "0"
+}
+
+function reiniciarInactividad(e) {
+
+    if (e && slidersList.contains(e.target)) {
+        slidersList.style.opacity = "1"
+        dataList.style.opacity = "1"
+        weightList.style.opacity = "1"
+        return 
+    }
+    
+    slidersDiv.style.opacity = "1"
+    dataDiv.style.opacity = "1"
+    weightDiv.style.opacity = "1"
+    exitFullscreen.style.opacity = "1"
+    a_link.style.opacity = "1"
+    slidersList.style.opacity = "1"
+    dataList.style.opacity = "1"
+    weightList.style.opacity = "1"
+    zhizwhaH.style.opacity = "1"
+
+    clearTimeout(temporizador)
+    temporizador = setTimeout(ocultar,3000)
+
+    clearTimeout(temporizador_textes)
+    temporizador_textes = setTimeout(ocultar_textes, 15000)
+}
+
+
+
+['mousemove', 'touchstart', 'keydown'].forEach(e => {
+    window.addEventListener(e, reiniciarInactividad);
+})
+
+reiniciarInactividad();
+
+
+/**
+* THREEJS
+*/
+
 // Scene
 const scene = new THREE.Scene()
 
@@ -112,79 +303,8 @@ const variables = {
     b: b1
 }
 
-// Buttons
-const slidersDiv = document.getElementById("dbSliders")
-const slidersBtn = document.getElementById("bSliders")
-const slidersList = document.getElementById("listSliders")
-const a_link = document.getElementById("link")
 
-
-slidersDiv.addEventListener('click', () => {
-    slidersList.classList.toggle('see')
-    slidersBtn.classList.toggle('close')
-})
-
-const dataDiv = document.getElementById("dbData")
-const dataBtn = document.getElementById("bData")
-const dataList = document.getElementById("listData")
-
-dataDiv.addEventListener('click', () => {
-    dataList.classList.toggle('see')
-    dataBtn.classList.toggle('close')
-})
-
-
-const weightDiv = document.getElementById("dbWeight")
-const weightBtn = document.getElementById("bWeight")
-const weightList = document.getElementById("listWeight")
-
-weightDiv.addEventListener('click', () => {
-    weightList.classList.toggle('see')
-    weightBtn.classList.toggle('close')
-})
-
-let temporizador
-let temporizador_textes
-
-function ocultar() {
-    slidersDiv.style.opacity = "0"
-    dataDiv.style.opacity = "0"
-    weightDiv.style.opacity = "0"
-    exitFullscreen.style.opacity = "0"
-    a_link.style.opacity = "0"
-}
-
-
-function ocultar_textes() {
-    slidersList.style.opacity = "0"
-    dataList.style.opacity = "0"
-    weightList.style.opacity = "0"
-}
-
-function reiniciarInactividad() {
-    slidersDiv.style.opacity = "1"
-    dataDiv.style.opacity = "1"
-    weightDiv.style.opacity = "1"
-    exitFullscreen.style.opacity = "1"
-    a_link.style.opacity = "1"
-    slidersList.style.opacity = "1"
-    dataList.style.opacity = "1"
-    weightList.style.opacity = "1"
-
-
-    clearTimeout(temporizador)
-    temporizador = setTimeout(ocultar,3000)
-
-    clearTimeout(temporizador_textes)
-    temporizador_textes = setTimeout(ocultar_textes, 15000)
-}
-
-['mousemove', 'touchstart', 'keydown'].forEach(e => {
-    window.addEventListener(e, reiniciarInactividad);
-})
-
-reiniciarInactividad();
-
+// Interface
 // Sliders
 
 const i_zoom = document.getElementById("i_zoom")
@@ -242,13 +362,11 @@ i_b.addEventListener('input', () => {
 })
 
 // Data Info
-
 const mesh_x = document.getElementById("mesh_x")
 const mesh_y = document.getElementById("mesh_y")
 const mesh_z = document.getElementById("mesh_z")
 const twril_tag = document.getElementById("twril")
 const elapsedTime_tag = document.getElementById("elapsedTime")
-
 
 /**
  * Test mesh

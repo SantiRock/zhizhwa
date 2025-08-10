@@ -5,141 +5,208 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
     <meta property="og:image" content="https://i.imgur.com/qp3A3W9.jpg" />
-    <meta property="og:title" content="Zhizhwa" />
-    <meta property="og:description" content="Zhizhwa - a1v8 interactive artistic web experience" />
-    <meta property="og:url" content="https://santirock.github.io/zhizhwa/" />
-    <meta http-equiv="Content-Language" content=" ">
-    <meta name="description" content="Zhizhwa - a1v8, interactive artistic web experience">
-    <meta name="robots" content="index, follow">
-    <meta name="keywords" content="threejs, webgl, opengl, fragment, vertex, shaders, shader, webart, netart, zhizhwa">
-    <link rel="stylesheet" href="./style.css">
-    <meta name="author" content="Santiago Quintero Pinto - a1v8"/>
-    <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.0.0/modern-normalize.min.css"
+    <meta property="og:title" content="A1V8" />
+    <meta property="og:description" content="Real-time interactive imagery" />
+    <meta property="og:url" content="https://a1v8.onrender.com/" />
+    <meta http-equiv="Content-Language" content="en" />
+    <meta name="description" content="Real-time interactive imagery" />
+    <meta name="robots" content="index, follow" />
+    <meta
+      name="keywords"
+      content="threejs, webgl, opengl, fragment, vertex, shaders, shader, webart, netart, A1V8, a1v8, realtime, real-time, interactive, imagery, visual, visuals, vj, video, mapping, web, design"
     />
-    <title>Zhizhwa</title>
+    <meta name="author" content="Santiago Quintero Pinto, a1v8" />
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.0.0/modern-normalize.min.css"
+    />
+    <title>A1V8</title>
     <link rel="stylesheet" href="./style.css" />
   </head>
 
   <body id="body">
     <canvas class="webgl"></canvas>
 
-    <div class="container">
-
-      <div class="exit_fullscreen" id="exit_fullscreen">
-        <p id="full_screen">Full Screen</p>
-        <p class="fullscreen_btn" id="exit_fullscreen_btn"></p></p>
+    <div id="modal1" class="modal is-hidden">
+      <div class="modal_container">
+        <p id="modal_close1" class="modal_closebtn"><b>X</b></p>
+        <p id="z_title" class="modal_text">Zhizhwa - De la lengua muisca: garabato</p>
+        <p id="z_text" class="modal_text">Inspirada en el universo VJ (mezcla de video en tiempo real), Zhizhwa es una interfaz web que permite al visitante modificar en tiempo real una animación generada por código, dando lugar a infinitas variaciones de una forma que se dibuja y desdibuja continuamente. Formas danzantes que acompañadas de música tienden a la sincronía, produciendo una experiencia sinestésica: fusión de percepciones sensoriales.</p>
+        <buttom id="modal_btn" class="modal_btn">Técnica</buttom>
       </div>
+    </div>
 
+    <div id="modal" class="modal is-hidden">
+      <div class="modal_container">
+        <p id="modal_close" class="modal_closebtn"><b>X</b></p>
+        <p class="modal_text">
+          <b>A1V8</b> es un proyecto artístico que investiga la imagen
+          interactiva en tiempo real mediante programación gráfica. Nos interesa
+          crear experiencias estéticas desde el código, explorando el potencial
+          expresivo de esta tecnología como lenguaje visual. Buscamos promover
+          la producción de proyectos web y/o no-web que integren propuestas
+          visuales interactivas.
+        </p>
+        <p class="modal_links"><b>Links</b></p>
+        <p class="tip_links_modal">(Si no carga bien intenta recargar)</p>
+        <ul class="modal_ul">
+          <li>
+            <a href="https://a1v8.onrender.com/" target="_blank">
+              - A1V8
+            </a>
+          </li>
+          <li>
+            <a href="https://santirock.github.io/test-skull/" target="_blank"
+              >- Skull_Test</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://santirock.github.io/webgl_drawing_modes/"
+              target="_blank"
+              >- WebGL Drawing Modes</a
+            >
+          </li>
+          <li class="ff">
+            <a href="https://www.instagram.com/a1v8visu/" target="_blank"
+              ><svg class="insta">
+                <use
+                  class="insta_svg"
+                  href="/images/symbol-defs.svg#instagram"
+                ></use></svg></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exit_fullscreen" id="exit_fullscreen">
+      <p id="full_screen">Full Screen</p>
+      <p class="fullscreen_btn" id="exit_fullscreen_btn"></p>
+    </div>
+
+    <div class="container" id="container">
       <div>
-      <div class="button" id="dbSliders">
-        <button class="" id="bSliders">V</button>
-        <b> -&nbsp; Sliders</b>
-      </div>
-    
-      <ul class="inputs see" id="listSliders">
-        <li>
-          <p class="titles">Zoom</p>
-          <input
-            id="i_zoom"
-            type="range"
-            min="0.6"
-            max="2.3"
-            step="0.01"
-            value="1.7"
-          />
-          <p class="numbers" id="n_zoom">1.7</p>
-        </li>
-        <li>
-          <p class="titles">Speed</p>
-          <input
-            id="i_speed"
-            type="range"
-            min="0.01"
-            max="0.9"
-            step="0.01"
-            value="0.03"
-          />
-          <p class="numbers" id="n_speed">0.03</p>
-        </li>
-        <li>
-          <p class="titles">Tickness</p>
-          <input
-            id="i_tickness"
-            type="range"
-            min="0.005"
-            max="0.3"
-            step="0.001"
-            value="0.3"
-          />
-          <p class="numbers" id="n_tickness">0.3</p>
-        </li>
-        <li>
-          <p class="titles">R</p>
-          <input
-            id="i_r"
-            type="range"
-            min="0.7"
-            max="1.0"
-            step="0.001"
-            value="1.0"
-          />
-          <p class="numbers" id="n_r">1</p>
-        </li>
-        <li>
-          <p class="titles">G</p>
-          <input
-            id="i_g"
-            type="range"
-            min="0.7"
-            max="1.0"
-            step="0.001"
-            value="1.0"
-          />
-          <p class="numbers" id="n_g">1</p>
-        </li>
-        <li>
-          <p class="titles">B</p>
-          <input
-            id="i_b"
-            type="range"
-            min="0.7"
-            max="1.0"
-            step="0.001"
-            value="1.0"
-          />
-          <p class="numbers" id="n_b">1</p>
-        </li>
-      </ul>
+        <h3 class="zhizhwa" id="zhizhwa">Zhizhwa</h3>
 
-      <div class="button" id="dbData">
-        <button class="close" id="bData">V</button>
-        <b> -&nbsp; Real Time Data</b>
-      </div>
+        <div class="button" id="dbSliders">
+          <button class="" id="bSliders">V</button>
+          <b> -&nbsp; Sliders</b>
+        </div>
 
-      <ul class="data_info" id="listData">
-          <li><p>mesh.rotatio.x: <span id="mesh_x"></span></p></li>
-          <li><p>mesh.rotatio.y: <span id="mesh_y"></span></p></li>
-          <li><p>mesh.rotatio.z: <span id="mesh_z"></span></p></li>
-          <li><p>elapsedTime: <span id="elapsedTime"></span></p></li>
-          <li><p>twril: <span id="twril"></span></p></li>
-      </ul>
+        <ul class="inputs see" id="listSliders">
+          <li>
+            <p class="titles">Zoom</p>
+            <input
+              id="i_zoom"
+              type="range"
+              min="0.6"
+              max="2.3"
+              step="0.01"
+              value="1.7"
+            />
+            <p class="numbers" id="n_zoom">1.7</p>
+          </li>
+          <li>
+            <p class="titles">Speed</p>
+            <input
+              id="i_speed"
+              type="range"
+              min="0.01"
+              max="0.9"
+              step="0.01"
+              value="0.03"
+            />
+            <p class="numbers" id="n_speed">0.03</p>
+          </li>
+          <li>
+            <p class="titles">Tickness</p>
+            <input
+              id="i_tickness"
+              type="range"
+              min="0.005"
+              max="0.3"
+              step="0.001"
+              value="0.3"
+            />
+            <p class="numbers" id="n_tickness">0.3</p>
+          </li>
+          <li>
+            <p class="titles">R</p>
+            <input
+              id="i_r"
+              type="range"
+              min="0.7"
+              max="1.0"
+              step="0.001"
+              value="1.0"
+            />
+            <p class="numbers" id="n_r">1</p>
+          </li>
+          <li>
+            <p class="titles">G</p>
+            <input
+              id="i_g"
+              type="range"
+              min="0.7"
+              max="1.0"
+              step="0.001"
+              value="1.0"
+            />
+            <p class="numbers" id="n_g">1</p>
+          </li>
+          <li>
+            <p class="titles">B</p>
+            <input
+              id="i_b"
+              type="range"
+              min="0.7"
+              max="1.0"
+              step="0.001"
+              value="1.0"
+            />
+            <p class="numbers" id="n_b">1</p>
+          </li>
+        </ul>
 
-      <div class="button" id="dbWeight">
-        <button class="close" id="bWeight">V</button>
-        <b> -&nbsp; Weight</b>
-      </div>
+        <div class="button" id="dbData">
+          <button class="rotation" id="bData">V</button>
+          <b> -&nbsp; Real Time Data</b>
+        </div>
 
-      <ul class="data_info" id="listWeight">
+        <ul class="data_info" id="listData">
+          <li>
+            <p>mesh.rotatio.x: <span id="mesh_x"></span></p>
+          </li>
+          <li>
+            <p>mesh.rotatio.y: <span id="mesh_y"></span></p>
+          </li>
+          <li>
+            <p>mesh.rotatio.z: <span id="mesh_z"></span></p>
+          </li>
+          <li>
+            <p>elapsedTime: <span id="elapsedTime"></span></p>
+          </li>
+          <li>
+            <p>twril: <span id="twril"></span></p>
+          </li>
+        </ul>
+
+        <div class="button" id="dbWeight">
+          <button class="rotation" id="bWeight">V</button>
+          <b> -&nbsp; Weight</b>
+        </div>
+
+        <ul class="data_info" id="listWeight">
           <li><p>shaders: 2 KB</p></li>
-          <li><p>javaScript: 8 KB</p></li>
-          <li><p>web: 7 KB</p></li>
-          <li><p>node_modules 73 MB</p></li>
-          <li><p>total: 73.2 MB</p></li>
-      </ul>
+          <li><p>javaScript: 14 KB</p></li>
+          <li><p>web:  29 KB</p></li>
+          <li><p>total: 45 KB</p></li>
+        </ul>
       </div>
-      <a id="link" href="https://www.instagram.com/_a1v8/" target="_blank">a1v8</a>
+
+      <div class="modalbtn">
+        <p class="link" id="link"><b>a1v8 +</b></p>
       </div>
     </div>
 
