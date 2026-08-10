@@ -528,5 +528,4 @@ const tick = () =>
 
 tick()
 
-console.log("A1V8 is an artistic project that explores real-time interactive imagery through graphic programming. We are interested in creating aesthetic experiences through code, exploring the expressive potential of technology as a visual language. Our aim is to promote the production of web and/or non-web projects that integrate interactive visual proposals.")
 
