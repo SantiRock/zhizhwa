@@ -340,11 +340,13 @@ const midiMap = {
     54: i_b
 }
 
-const midiAccess = await navigator.requestMIDIAccess()
+async function initMIDI() {
+    const midiAccess = await navigator.requestMIDIAccess()
 
-for (const input of midiAccess.inputs.values()) {
-    //console.log(input.name)
-    input.onmidimessage = handleMIDIMessage
+    for (const input of midiAccess.inputs.values()) {
+       //console.log(input.name)
+       input.onmidimessage = handleMIDIMessage
+    }
 }
 
 function handleMIDIMessage(event) {
@@ -366,6 +368,7 @@ function handleMIDIMessage(event) {
     range.dispatchEvent(new Event('input', {bubbles: true}))
 }
 
+initMIDI()
 
 i_zoom.addEventListener('input', () => {
     n_zoom.textContent = i_zoom.value
