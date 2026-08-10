@@ -310,51 +310,88 @@ const variables = {
 const i_zoom = document.getElementById("i_zoom")
 const n_zoom = document.getElementById("n_zoom")
 
-i_zoom.addEventListener('input', () => {
-    n_zoom.textContent = i_zoom.value
-    camera.position.z = i_zoom.value  
-})
-
 const i_speed = document.getElementById("i_speed")
 const n_speed = document.getElementById("n_speed")
 
-i_speed.addEventListener('input', () => {
-    n_speed.textContent = i_speed.value
-    material.uniforms.u_twirl_speed.value = i_speed.value
-})
-
 const i_tickness = document.getElementById("i_tickness")
 const n_tickness = document.getElementById("n_tickness")
-
-i_tickness.addEventListener('input', () => {
-    n_tickness.textContent = i_tickness.value
-    material.uniforms.u_grosor.value = i_tickness.value
-})
 
 const i_r = document.getElementById("i_r")
 const n_r = document.getElementById("n_r")
 n_r.textContent = r1
 i_r.value = r1
 
-i_r.addEventListener('input', () => {
-    n_r.textContent = i_r.value
-    material.uniforms.u_r.value = i_r.value
-})
-
 const i_g = document.getElementById("i_g")
 const n_g = document.getElementById("n_g")
 n_g.textContent = g1
 i_g.value = g1
 
-i_g.addEventListener('input', () => {
-    n_g.textContent = i_g.value
-    material.uniforms.u_g.value = i_g.value
-})
-
 const i_b = document.getElementById("i_b")
 const n_b = document.getElementById("n_b")
 n_b.textContent = b1
 i_b.value = b1
+
+const midiMap = {
+    48: i_zoom,
+    49: i_speed,
+    50: i_tickness,
+    52: i_r,
+    53: i_g,
+    54: i_b
+}
+
+const midiAccess = await navigator.requestMIDIAccess()
+
+for (const input of midiAccess.inputs.values()) {
+    //console.log(input.name)
+    input.onmidimessage = handleMIDIMessage
+}
+
+function handleMIDIMessage(event) {
+    //console.log(event.data)
+
+    const [status, controller, value] = event.data
+
+    if ((status & 0xF0) !== 0xB0) return
+
+    const range = midiMap[controller]
+
+    if (!range) return
+
+    const min = Number(range.min)
+    const max = Number(range.max)
+
+    range.value = min + (value / 127) * (max - min)
+
+    range.dispatchEvent(new Event('input', {bubbles: true}))
+}
+
+
+i_zoom.addEventListener('input', () => {
+    n_zoom.textContent = i_zoom.value
+    camera.position.z = i_zoom.value  
+})
+
+
+i_speed.addEventListener('input', () => {
+    n_speed.textContent = i_speed.value
+    material.uniforms.u_twirl_speed.value = i_speed.value
+})
+
+i_tickness.addEventListener('input', () => {
+    n_tickness.textContent = i_tickness.value
+    material.uniforms.u_grosor.value = i_tickness.value
+})
+
+i_r.addEventListener('input', () => {
+    n_r.textContent = i_r.value
+    material.uniforms.u_r.value = i_r.value
+})
+
+i_g.addEventListener('input', () => {
+    n_g.textContent = i_g.value
+    material.uniforms.u_g.value = i_g.value
+})
 
 i_b.addEventListener('input', () => {
     n_b.textContent = i_b.value
